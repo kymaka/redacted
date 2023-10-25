@@ -13,9 +13,7 @@ public class ResultData {
     this.num = num;
   }
 
-  @Id
-  @GeneratedValue
-  private long id;
+  @Id @GeneratedValue private long id;
 
   private long num;
 
