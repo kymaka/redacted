@@ -12,10 +12,16 @@ class JsonDataParser implements DataParser {
   public List<SourceData> parse(String[] numStrings, Optional<NumbersArray> args) {
     LinkedList<SourceData> nums = new LinkedList<>();
     if (args.isPresent()) {
-      for (long num : args.get().nums()) {
-        nums.add(new SourceData(num));
+      if (args.get().nums() != null) {
+        for (long num : args.get().nums()) {
+          nums.add(new SourceData(num));
+        }
+        return nums;
+      } else {
+        return null;
       }
+    } else {
+      return null;
     }
-    return nums;
   }
 }

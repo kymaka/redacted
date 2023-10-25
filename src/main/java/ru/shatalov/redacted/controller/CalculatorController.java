@@ -42,8 +42,11 @@ public class CalculatorController {
       @PathVariable(name = "nums") String[] numsString) {
     if (parser.parseInputSource(source)) {
       List<SourceData> nums = parser.parseValues(numsString, args, sourceRepository);
-      ResultData resultData = calculatorService.add(nums);
+      if (nums == null) {
+        return new ResponseEntity<>("ERROR", HttpStatus.BAD_REQUEST);
+      }
 
+      ResultData resultData = calculatorService.add(nums);
       if (outputGenerator.parseOutputDist(destination)) {
         return outputGenerator.generateOutput(resultData, resultRepository);
       }
@@ -60,8 +63,11 @@ public class CalculatorController {
 
     if (parser.parseInputSource(source)) {
       List<SourceData> nums = parser.parseValues(numsString, args, sourceRepository);
-      ResultData resultData = calculatorService.mul(nums);
+      if (nums == null) {
+        return new ResponseEntity<>("ERROR", HttpStatus.BAD_REQUEST);
+      }
 
+      ResultData resultData = calculatorService.mul(nums);
       if (outputGenerator.parseOutputDist(destination)) {
         return outputGenerator.generateOutput(resultData, resultRepository);
       }
@@ -78,6 +84,10 @@ public class CalculatorController {
 
     if (parser.parseInputSource(source)) {
       List<SourceData> nums = parser.parseValues(numsString, args, sourceRepository);
+      if (nums == null) {
+        return new ResponseEntity<>("ERROR", HttpStatus.BAD_REQUEST);
+      }
+
       ResultData resultData =
           calculatorService.mulAdd(
               nums.get(0).getNum(), nums.get(1).getNum(), nums.get(2).getNum());
@@ -98,8 +108,11 @@ public class CalculatorController {
 
     if (parser.parseInputSource(source)) {
       List<SourceData> nums = parser.parseValues(numsString, args, sourceRepository);
-      ResultData resultData = calculatorService.lcm(nums.get(0).getNum(), nums.get(1).getNum());
+      if (nums == null) {
+        return new ResponseEntity<>("ERROR", HttpStatus.BAD_REQUEST);
+      }
 
+      ResultData resultData = calculatorService.lcm(nums.get(0).getNum(), nums.get(1).getNum());
       if (outputGenerator.parseOutputDist(destination)) {
         return outputGenerator.generateOutput(resultData, resultRepository);
       }

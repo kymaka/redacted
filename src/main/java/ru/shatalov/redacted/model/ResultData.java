@@ -1,6 +1,7 @@
 package ru.shatalov.redacted.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
 @Entity
@@ -12,7 +13,9 @@ public class ResultData {
     this.num = num;
   }
 
-  @Id private long id;
+  @Id
+  @GeneratedValue
+  private long id;
 
   private long num;
 
